@@ -27,5 +27,7 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2, verbose=False)
 
+st.toast("Simulation finished!", icon="🎉")
+
 plotter = solid.plot("Principal Values of Cauchy Stress")
 stpyvista(plotter)
