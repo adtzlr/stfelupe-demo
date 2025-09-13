@@ -11,10 +11,10 @@ import pyvista as pv
 # plotter = pv.Plotter()
 
 st.title("A Streamlit app for FElupe")
-n = st.slider("Number of points per axis", 2, 11, 4)
-v = st.slider("Stretch", 1.0, 2.0, 2.0)
+n = st.sidebar.slider("Details", 2, 11, 4)
+v = st.sidebar.slider("Stretch", 1.0, 2.0, 2.0)
 
-progress_bar = st.progress(0)
+progress_bar = st.sidebar.progress(0)
 def show_progress(i, j, substep):
     progress_bar.progress((1 + j) / len(move))
 
