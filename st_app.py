@@ -151,8 +151,7 @@ if plot_curve_axial:
         ylabel=r"Normal Force $F_1$ in kN $\longrightarrow$",
     )
     with col1:
-        with tab1:
-            st.pyplot(fig)
+        st.pyplot(fig)
 
 if plot_stiffness_lateral:
     fig, ax = job.plot(
@@ -165,8 +164,7 @@ if plot_stiffness_lateral:
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
     with col1:
-        with tab2:
-            st.pyplot(fig)
+        st.pyplot(fig)
     force = job.y.copy()
     fig, ax = job.plot(
         x=force,
@@ -179,8 +177,7 @@ if plot_stiffness_lateral:
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
     with col1:
-        with tab3:
-            st.pyplot(fig)
+        st.pyplot(fig)
 
 if plot_model_axial:
     plotter = solids[1].plot(show_undeformed=False, color="white", show_edges=False)
