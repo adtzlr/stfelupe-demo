@@ -33,4 +33,4 @@ job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
 plotter = solid.plot("Principal Values of Cauchy Stress")
-# stpyvista(plotter)
+stpyvista(plotter)
