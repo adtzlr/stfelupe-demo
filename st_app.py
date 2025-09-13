@@ -8,6 +8,7 @@ start_xvfb()
 
 st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
+tab1, tab2, tab3 = st.tabs(["Axial Force", "Lateral Stiffness (Displacement)", "Lateral Stiffness (Force)"])
 
 st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
@@ -138,7 +139,8 @@ if plot_curve_axial:
         ylabel=r"Normal Force $F_1$ in kN $\longrightarrow$",
     )
     with col1:
-        st.pyplot(fig)
+        with tab1:
+            st.pyplot(fig)
 
 if plot_stiffness_lateral:
     fig, ax = job.plot(
@@ -151,7 +153,8 @@ if plot_stiffness_lateral:
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
     with col1:
-        st.pyplot(fig)
+        with tab2:
+            st.pyplot(fig)
     force = job.y.copy()
     fig, ax = job.plot(
         x=force,
@@ -164,7 +167,8 @@ if plot_stiffness_lateral:
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
     with col1:
-        st.pyplot(fig)
+        with tab3:
+            st.pyplot(fig)
 
 if plot_model_axial:
     plotter = solids[1].plot(show_undeformed=False, color="white", show_edges=False)
