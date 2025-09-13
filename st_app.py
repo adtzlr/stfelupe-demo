@@ -7,6 +7,7 @@ import numpy as np
 start_xvfb()
 
 st.set_page_config(layout="wide")
+col1, col2 = st.columns(2)
 
 st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
@@ -35,8 +36,8 @@ revolve = 9  # number of elements for revolution (180°)
 plot_mesh = False
 plot_curve_axial = True
 plot_stiffness_lateral = True
-plot_model_axial = False
-plot_model_lateral = True
+plot_model_axial = True
+plot_model_lateral = False
 
 # %% model setup
 R = D / 2
@@ -136,7 +137,8 @@ if plot_curve_axial:
         xlabel=r"Displacement $d_1$ in mm $\longrightarrow$",
         ylabel=r"Normal Force $F_1$ in kN $\longrightarrow$",
     )
-    st.pyplot(fig)
+    with col1:
+        st.pyplot(fig)
 
 if plot_stiffness_lateral:
     fig, ax = job.plot(
@@ -148,7 +150,8 @@ if plot_stiffness_lateral:
         xlabel=r"Displacement $d_1$ in mm $\longrightarrow$",
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
-    st.pyplot(fig)
+    with col1:
+        st.pyplot(fig)
     force = job.y.copy()
     fig, ax = job.plot(
         x=force,
@@ -160,7 +163,8 @@ if plot_stiffness_lateral:
         xlabel=r"Normal Force $F_1$ in kN $\longrightarrow$",
         ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
     )
-    st.pyplot(fig)
+    with col1:
+        st.pyplot(fig)
 
 if plot_model_axial:
     plotter = solids[1].plot(show_undeformed=False, color="white", show_edges=False)
@@ -170,6 +174,7 @@ if plot_model_axial:
         show_undeformed=False,
         project=fem.topoints,
     )
-    stpyvista(plotter)
+    with col2:
+        stpyvista(plotter)
 
 st.toast("Simulation finished!", icon="🎉")
