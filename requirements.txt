@@ -18,5 +18,6 @@ trame-components
 trame-server
 trame-vtk
 trame-vuetify
+pypardiso
 felupe[all]
 git+https://github.com/adtzlr/felupe
