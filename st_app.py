@@ -29,8 +29,8 @@ mu = 1.0  # shear modulus in MPa
 K = 5000.0  # bulk modulus in MPa
 
 surface = 2  # 0 = rectangle, 1 = outside, 2 = inside and outside
-details = 6  # number of points per layer
-revolve = 12  # number of elements for revolution (180°)
+details = 4  # number of points per layer
+revolve = 9  # number of elements for revolution (180°)
 
 plot_mesh = True
 plot_curve_axial = True
