@@ -1,5 +1,5 @@
 import streamlit as st
-from stpyvista import stpyvista
+from stpyvista.trame_backend import stpyvista
 from stpyvista.utils import start_xvfb
 import felupe as fem
 
