@@ -65,7 +65,8 @@ sheets = fem.MeshContainer(list_of_sheets, merge=True).stack()
 meshes = fem.MeshContainer([rects, sheets], merge=True, decimals=3)
 
 if plot_mesh:
-    meshes.plot(colors=[None, "white"]).show()
+    plotter = meshes.plot(colors=[None, "white"])
+    stpyvista(plotter)
 
 regions = [fem.RegionQuad(m) for m in meshes]
 field_rubber, field_metal = [fem.FieldAxisymmetric(r) for r in regions]
@@ -117,7 +118,7 @@ def shear_stiffness(i, j, substep):
             show_undeformed=False,
             project=fem.topoints,
         )
-        stpyvista.plot(plotter)
+        stpyvista(plotter)
     
     show_progress(i, j, substep)
 
@@ -169,6 +170,6 @@ if plot_model_axial:
         show_undeformed=False,
         project=fem.topoints,
     )
-    stpyvista.plot(plotter)
+    stpyvista(plotter)
 
 st.toast("Simulation finished!", icon="🎉")
