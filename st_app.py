@@ -11,8 +11,8 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
 
 with col1:
-    tab1, tab2 = st.tabs(
-        ["Compression", "Shear"]
+    tab1, tab2, tab3 = st.tabs(
+        ["Axial Force", "Lateral Stiffness (Displacement)", "Lateral Stiffness (Force)"]
     )
 
 st.sidebar.title("FElupe")
@@ -168,6 +168,20 @@ if plot_stiffness_lateral:
     )
     with col1:
         with tab2:
+            st.pyplot(fig)
+    force = job.y.copy()
+    fig, ax = job.plot(
+        x=force,
+        y=np.array(stiffness_lateral).reshape(-1, 1),
+        xaxis=0,
+        yaxis=0,
+        xscale=-0.001,
+        yscale=0.001,
+        xlabel=r"Normal Force $F_1$ in kN $\longrightarrow$",
+        ylabel=r"Shear Stiffness $k_2$ in kN / mm $\longrightarrow$",
+    )
+    with col1:
+        with tab3:
             st.pyplot(fig)
 
 if plot_model_axial:
