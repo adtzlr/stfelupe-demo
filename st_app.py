@@ -11,9 +11,7 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
 
 with col1:
-    tab1, tab2 = st.tabs(
-        ["Compression", "Shear"]
-    )
+    tab1, tab2 = st.tabs(["Compression", "Shear"])
 
 st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
