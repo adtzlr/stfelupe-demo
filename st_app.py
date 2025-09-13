@@ -139,8 +139,7 @@ job = fem.CharacteristicCurve(
     steps=[step],
     boundary=boundaries["move"],
     callback=shear_stiffness,
-    solver=pypardiso.spsolve,
-).evaluate(x0=field, tol=1e-2, verbose=1)
+).evaluate(x0=field, tol=1e-2, verbose=1, solver=pypardiso.spsolve)
 
 if plot_curve_axial:
     fig, ax = job.plot(
