@@ -3,28 +3,38 @@ from stpyvista.trame_backend import stpyvista
 from stpyvista.utils import start_xvfb
 import felupe as fem
 import numpy as np
+import pypardiso
 
 start_xvfb()
 
 st.set_page_config(layout="wide")
 col1, col2 = st.columns(2)
-tab1, tab2, tab3 = st.tabs(["Axial Force", "Lateral Stiffness (Displacement)", "Lateral Stiffness (Force)"])
+tab1, tab2, tab3 = st.tabs(
+    ["Axial Force", "Lateral Stiffness (Displacement)", "Lateral Stiffness (Force)"]
+)
 
 st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
 v = st.sidebar.slider("Stretch", 1.0, 2.0, 2.0)
 
 progress_bar = st.progress(0, text="Progress")
+
+
 def show_progress(i, j, substep):
     progress_bar.progress((1 + j) / len(move))
+
 
 H = st.sidebar.slider("Height", 10.0, 500.0, 50.0)  # height in mm
 D = st.sidebar.slider("Diameter", 10.0, 500.0, 100.0)  # diameter in mm
 d = st.sidebar.slider("Hole", 0.0, 500.0, 50.0)  # diameter in mm
 n = st.sidebar.slider("Repetitions", 1, 8, 3)  # number of rubber layers
-t = st.sidebar.slider("Separator height", 1.0, 6.0, 3.0, 0.25)  # thickness of metal sheet in mm
+t = st.sidebar.slider(
+    "Separator height", 1.0, 6.0, 3.0, 0.25
+)  # thickness of metal sheet in mm
 
-axial_max = st.sidebar.slider("Max. deformation", 0.0, 1.0, 0.2)  # max. axial deformation
+axial_max = st.sidebar.slider(
+    "Max. deformation", 0.0, 1.0, 0.2
+)  # max. axial deformation
 axial_steps = st.sidebar.slider("Steps", 1, 50, 10)  # number of axial steps
 
 mu = 1.0  # shear modulus in MPa
@@ -105,7 +115,7 @@ def shear_stiffness(i, j, substep):
     step_3d = fem.Step(items=solids_3d, boundaries=boundaries_3d, ramp=ramp_3d)
     job_3d = fem.CharacteristicCurve(steps=[step_3d], boundary=boundaries_3d["move"])
     job_3d.evaluate(
-        x0=field_3d, tol=1e-1, verbose=False, parallel=True
+        x0=field_3d, tol=1e-1, verbose=False, parallel=True, solver=pypardiso.spsolve
     )
 
     stiffness_lateral.append(job_3d.y[0][1] * 2 * 1e6)
@@ -121,12 +131,15 @@ def shear_stiffness(i, j, substep):
             project=fem.topoints,
         )
         stpyvista(plotter)
-    
+
     show_progress(i, j, substep)
 
 
 job = fem.CharacteristicCurve(
-    steps=[step], boundary=boundaries["move"], callback=shear_stiffness
+    steps=[step],
+    boundary=boundaries["move"],
+    callback=shear_stiffness,
+    solver=pypardiso.spsolve,
 ).evaluate(x0=field, tol=1e-2, verbose=1)
 
 if plot_curve_axial:
