@@ -19,3 +19,4 @@ trame-server
 trame-vtk
 trame-vuetify
 felupe[all]
+git+https://github.com/adtzlr/felupe
