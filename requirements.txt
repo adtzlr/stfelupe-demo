@@ -18,3 +18,4 @@ trame-components
 trame-server
 trame-vtk
 trame-vuetify
+felupe[all]
