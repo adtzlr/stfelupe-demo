@@ -32,11 +32,11 @@ surface = 2  # 0 = rectangle, 1 = outside, 2 = inside and outside
 details = 4  # number of points per layer
 revolve = 9  # number of elements for revolution (180°)
 
-plot_mesh = True
+plot_mesh = False
 plot_curve_axial = True
 plot_stiffness_lateral = True
-plot_model_axial = True
-plot_model_lateral = False
+plot_model_axial = False
+plot_model_lateral = True
 
 # %% model setup
 R = D / 2
