@@ -3,14 +3,9 @@ from stpyvista import stpyvista
 from stpyvista.utils import start_xvfb
 import felupe as fem
 
-# Initial configuration
 start_xvfb()
 
-import pyvista as pv
-
-# plotter = pv.Plotter()
-
-st.title("A Streamlit app for FElupe")
+st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
 v = st.sidebar.slider("Stretch", 1.0, 2.0, 2.0)
 
@@ -32,7 +27,5 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-ax = solid.imshow("Principal Values of Cauchy Stress")
-# stpyvista(plotter)
-
-st.pyplot(ax.get_figure())
+plotter = solid.imshow("Principal Values of Cauchy Stress")
+stpyvista(plotter)
