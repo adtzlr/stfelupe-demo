@@ -118,6 +118,8 @@ def shear_stiffness(i, j, substep):
             project=fem.topoints,
         )
         stpyvista.plot(plotter)
+    
+    show_progress(i, j, substep)
 
 
 job = fem.CharacteristicCurve(
