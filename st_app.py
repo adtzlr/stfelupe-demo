@@ -12,7 +12,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     tab1, tab2, tab3 = st.tabs(
-        ["Axial Force", "Lateral Stiffness (Displacement)", "Lateral Stiffness (Force)"]
+        ["Compression", "Shear (Displacement)", "Shear (Force)"]
     )
 
 st.sidebar.title("FElupe")
