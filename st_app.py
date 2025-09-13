@@ -5,6 +5,8 @@ import felupe as fem
 
 start_xvfb()
 
+st.set_page_config(layout="wide")
+
 st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
 v = st.sidebar.slider("Stretch", 1.0, 2.0, 2.0)
