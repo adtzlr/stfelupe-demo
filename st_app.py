@@ -117,7 +117,7 @@ def shear_stiffness(i, j, substep):
     step_3d = fem.Step(items=solids_3d, boundaries=boundaries_3d, ramp=ramp_3d)
     job_3d = fem.CharacteristicCurve(steps=[step_3d], boundary=boundaries_3d["move"])
     job_3d.evaluate(
-        x0=field_3d, tol=1e-1, verbose=False, parallel=True, solver=pypardiso.spsolve
+        x0=field_3d, tol=1e-4, verbose=False, parallel=True, solver=pypardiso.spsolve
     )
 
     stiffness_lateral.append(job_3d.y[0][1] * 2 * 1e6)
