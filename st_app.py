@@ -9,7 +9,7 @@ st.sidebar.title("FElupe")
 n = st.sidebar.slider("Details", 2, 11, 4)
 v = st.sidebar.slider("Stretch", 1.0, 2.0, 2.0)
 
-progress_bar = st.sidebar.progress(text="Progress")
+progress_bar = st.sidebar.progress(0, text="Progress")
 def show_progress(i, j, substep):
     progress_bar.progress((1 + j) / len(move))
 
